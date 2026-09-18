@@ -55,41 +55,23 @@ in at least 4 of 5 tries.
 
 ---
 
-## 4. Something about your chunks
+## 4. At least 8 of the 10 sampled chunks can answer a question about their own content on their own, without relying on surrounding context.
 
-<!-- YOU WRITE THIS ONE.
-
-     How would you know if your chunks were the right size? Name something
-     countable or observable.
-
-     Examples of the right shape — don't copy these, they should come from
-     what you actually saw in Milestone 3:
-       - "At least 4 of 5 sampled chunks read as a complete thought, with no
-          sentence cut in half at either end."
-       - "No chunk is shorter than 200 characters, since anything below that
-          in my corpus turned out to be a heading with no content under it." -->
-
+<!-- I consider a chunk well-sized when its content is enough for a reader to answer a related question without anything else.-->
 
 
 **Why this target:**
-
+<!-- Most documents in the corpus are short, so their chunks hold fairly complete content; a few documents are longer and may get split, so I left room for 2 failures instead of requiring 10 of 10.-->
 
 
 ---
 
-## 5. Your choice
+## 5. Every cited source actually contains the information given in the answer.
 
-<!-- YOU WRITE THIS ONE TOO.
-
-     Pick something you actually care about getting right. It could be about
-     speed, about refusals, about a particular kind of question your corpus
-     handles badly, about source attribution being correct rather than merely
-     present — anything, as long as it names a number or an observable
-     outcome. -->
-
-
+<!-- An answer citing the wrong document is worse than no answer.-->
 
 **Why this target:**
+<!-- An answer citing the wrong document is worse than no answer. We need to verify this to ensure the answers are correct and reliable.-->
 
 
 
