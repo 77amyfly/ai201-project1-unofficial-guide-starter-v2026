@@ -27,6 +27,8 @@
 
      Milestone 5. -->
 
+This system answers questions about campus life at a small college, using a corpus of 88 student-written documents covering courses, housing, dining, work opportunities, and campus logistics. It retrieves relevant documents, grounds answers in the text, and refuses to answer questions the documents don't cover. Users can ask things like "What's the workload for Cell Biology?" and get sourced answers drawn directly from student experiences, not from generic knowledge.
+
 ## Chunking Strategy
 
 **Chunk size: One document**
@@ -166,8 +168,10 @@ The gap between 0.493 and 0.825, so I set cutoff at 0.6 to sit safely in the mid
      Milestone 5. -->
 
 **1.**
+I asked Claude whether my standard 4 (chunks self-contained) was actually objective, or just opinion dressed up as a standard. It proposed three mechanical checks: no cut-off sentences at the edges, no dangling references to external content, can answer questions about the topic. I realized those three were implementation details, not the core idea. I simplified the standard to: "chunks can answer a question about their own content on their own, without relying on surrounding context", more direct and easier to judge consistently.
 
 **2.**
+I asked Claude whether I could design a test question that requires the model to synthesize information (add up midterms + final exam count) rather than just extract one fact from one sentence. Claude said yes, this is actually the main work RAG should do: understanding and processing retrieved information, not just copying it. Based on that insight, I designed "How many exams does Linear Algebra have?" as one of my five test questions.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
