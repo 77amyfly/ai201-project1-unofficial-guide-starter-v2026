@@ -29,18 +29,18 @@
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Chunk size: One document**
+**Overlap: 0**
 
-<!-- What about YOUR documents made you pick these numbers? Short posts and
-     long sectioned guides don't want the same chunking, and "800 seemed
-     reasonable" earns nothing. Point at something you noticed when you read
-     the documents in Milestone 1.
+<!-- One document = one chunk.
 
-     If you changed your mind partway through, say so and say why. That's worth
-     more than pretending you got it right first time.
-
-     Milestone 3. -->
+    Each document in campus_life covers one topic (e.g. one course)
+    through several attributes: exam, workload, curve. Splitting by 
+    attribute would separate the attribute from the topic name at 
+    the top of the document, so a question like. "Cell Biology workload"
+    would no longer match the chunk that holds the answer. 
+    Documents are short (178-549 chars), so a whole post is still a 
+    focused chunk. No overlap since there are no cut points. -->
 
 ## Sample Chunks
 
@@ -108,13 +108,21 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
      visible. Milestone 4. -->
 
 **Question:**
+"How many exams does Linear Algebra have?"
 
 **Answer:**
 
-```
+```  (best distance 0.385, cutoff 0.6)
+
+MATH 220 Linear Algebra has two midterms and a cumulative final. 
+
+Source: course_math_220.txt (also found in course_math_220_exams.txt)
+
+Sources retrieved: course_cs_210_exams.txt, course_engl_205_exams.txt, course_math_220.txt, course_math_220_exams.txt, course_math_220_workload.txt
+
 ```
 
-**My relevance cutoff:**
+**My relevance cutoff: 0.6**
 
 <!-- The number you set in config.py, and how you got there.
 
@@ -122,12 +130,29 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
      that it clearly doesn't, and wrote down the best distance for each. What
      did those two groups look like? Where was the gap? Put the actual numbers
      here — the table below wants all ten rows.
+     
 
      Milestone 4. -->
+I ran five questions my corpus covers and recorded their best distances:
+0.493, 0.394, 0.385, 0.410, 0.295
+
+Then ran five out-of-scope questions:
+0.825, 0.934, 0.886, 0.896, 0.844
+
+The gap between 0.493 and 0.825, so I set cutoff at 0.6 to sit safely in the middle.
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| Does Cell Biology have lecture? | Yes | 0.493 |
+| How many midterms does Linear Algebra have? | Yes | 0.394 |
+| How many exams does Linear Algebra have? | Yes | 0.385 |
+| Do we have On-campus work? | Yes | 0.410 |
+| What's the weekly limit for study room bookings per person? | Yes | 0.295 |
+| What is the capital of Mongolia? | No | 0.825 |
+| How do I change the oil in a diesel engine? | No | 0.934 |
+| Who won the 1994 World Cup? | No | 0.886 |
+| What is the recommended dosage of ibuprofen for a headache? | No | 0.844 |
+| How do I write a for loop in Rust? | No | 0.896 |
 
 ## How I Used AI
 
@@ -171,15 +196,69 @@ Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 4. Sampled chunks can answer a question about their own content on their own, without relying on surrounding context | 8 of 10| 10 of 10| 10 of 10|10 of 10 | MET |
+| 5. Cited source contains the information given in the answer| 5 of 5  | 5 of 5 | 5 of 5 | 5 of 5 | MET |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
      Name the file and function that produced it. -->
+### Evidence
+
+**Criterion 1 & 2** — from results/run_2026-09-21_1156_before.md, run_eval.py::main:
+### Does Cell Biology have lecture? — run 1
+
+- Best distance: 0.4760 (passed the gate)
+- Sources retrieved: course_biol_160.txt, course_biol_160_exams.txt, course_biol_160_workload.txt, course_cs_210.txt, course_econ_101.txt
+
+```
+Yes, Cell Biology (BIOL 160) has a format of lecture three times a week. 
+
+Source: course_biol_160.txt
+```
+
+**Criterion 3** —from results/run_2026-09-21_1156_before.md, run_eval.py::check_out_of_scope:
+| Out-of-scope question | Best distance | Gate |
+|---|---|---|
+| What is the capital of Mongolia? | 0.825 | refused |
+| How do I change the oil in a diesel engine? | 0.934 | refused |
+| Who won the 1994 World Cup? | 0.886 | refused |
+| What is the recommended dosage of ibuprofen for a headache? | 0.844 | refused |
+| How do I write a for loop in Rust? | 0.896 | refused |
+
+---
+
+**Criterion 4** —from results/chunks_check_before.md, chunker.py::split_documents:
+Chunk 4  |  source: course_cs_340_exams.txt#0  |  produced by: chunker.py::split_documents
+======================================================================
+CS 340 Databases — assessment
+
+One midterm and a final, both open-book. Lightly curved, usually two or three points.
+
+Start the term project in week three, not week eight; everyone learns this the hard way.
+
+Chunk 9  |  source: housing_calder_annexe_noise.txt#0  |  produced by: chunker.py::split_documents
+======================================================================
+Noise levels in Calder Annexe
+
+Asked about this a lot so writing it down. Depends entirely on your cluster; there's no building-wide pattern.
+
+If you're someone who needs quiet to work, the library is open until 2am during term and that's what most people in this building end up doing.
+
+**Criterion 5** — from results/run_2026-09-21_1156_before.md, run 2 of the midterms question:
+### How many midterms does Linear Algebra have? — run 2
+
+- Best distance: 0.3867 (passed the gate)
+- Sources retrieved: course_cs_210_exams.txt, course_math_220.txt, course_math_220_exams.txt, course_math_220_workload.txt, course_phys_130_exams.txt
+
+```
+Linear Algebra (MATH 220) has two midterms. 
+
+This information comes from **course_math_220.txt**, **course_math_220_exams.txt**, and **course_math_220_workload.txt**.
+```
+
 
 ## Verdicts
 
