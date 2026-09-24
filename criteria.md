@@ -23,9 +23,9 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
+Some topics are only mentioned in one or two pieces of documents, so I left room for one error.
 <!-- e.g. "One of my questions is about a topic only two documents mention, so
      I expect that one to be hard." -->
-
 ---
 
 ## 2. Every answer names a source
@@ -33,6 +33,7 @@ contains the answer.
 Every answer the system produces names at least one source document.
 
 **Why this target:**
+Every answer must be factually accurate and not made up by the model.
 <!-- Why all five and not four? What about your setup makes that achievable —
      or what would have to go wrong for it not to be? -->
 
@@ -44,12 +45,12 @@ When I ask a question my documents clearly don't cover, the relevance gate
 stops it and the system returns "I don't have enough information about that" —
 in at least 4 of 5 tries.
 
-<!-- The five questions are the ones in `OUT_OF_SCOPE` at the bottom of
-     `questions.py`, and `run_eval.py` puts them through the gate and writes
-     what happened into your run log. Swap them for your own if you'd rather —
-     just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
 **Why this target:**
+The five questions are the ones in `OUT_OF_SCOPE` at the bottom of
+`questions.py`, and `run_eval.py` puts them through the gate and writes
+what happened into your run log. Swap them for your own if you'd rather —
+just keep five of them, or the "4 of 5" above has nothing to be 4 of. 
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
      Was there a clean gap, or did the two groups overlap? -->
 
@@ -57,22 +58,21 @@ in at least 4 of 5 tries.
 
 ## 4. At least 8 of the 10 sampled chunks can answer a question about their own content on their own, without relying on surrounding context.
 
-<!-- I consider a chunk well-sized when its content is enough for a reader to answer a related question without anything else.-->
+I consider a chunk well-sized when its content is enough for a reader to answer a related question without anything else.
 
 
 **Why this target:**
-<!-- Most documents in the corpus are short, so their chunks hold fairly complete content; a few documents are longer and may get split, so I left room for 2 failures instead of requiring 10 of 10.-->
+Most documents in the corpus are short, so their chunks hold fairly complete content; a few documents are longer and may get split, so I left room for 2 failures instead of requiring 10 of 10.
 
 
 ---
 
 ## 5. Every cited source actually contains the information given in the answer.
 
-<!-- An answer citing the wrong document is worse than no answer.-->
+An answer citing the wrong document is worse than no answer.
 
 **Why this target:**
-<!-- An answer citing the wrong document is worse than no answer. We need to verify this to ensure the answers are correct and reliable.-->
-
+An answer citing the wrong document is worse than no answer. We need to verify this to ensure the answers are correct and reliable.
 
 
 ---
