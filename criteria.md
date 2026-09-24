@@ -49,11 +49,7 @@ in at least 4 of 5 tries.
 **Why this target:**
 The five questions are the ones in `OUT_OF_SCOPE` at the bottom of
 `questions.py`, and `run_eval.py` puts them through the gate and writes
-what happened into your run log. Swap them for your own if you'd rather —
-just keep five of them, or the "4 of 5" above has nothing to be 4 of. 
-<!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
-
+what happened into your run log. 
 ---
 
 ## 4. At least 8 of the 10 sampled chunks can answer a question about their own content on their own, without relying on surrounding context.
