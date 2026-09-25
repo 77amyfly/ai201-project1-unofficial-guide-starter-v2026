@@ -379,20 +379,15 @@ Retrieval is identical before and after(same best distance, same five files,
 the admin file among them both times) so this is generation, caused by the one
 thing I changed.
 
-The model now appears to check the source of every statement it makes, which is
-what I asked for. The side effect is wordier answers: a yes/no question about
-whether campus jobs exist now comes back with an unrequested point about
-financial aid, and each added claim brings a citation my scorer then flags.
 
-I am not sure how to fix it. Tightening the citation rule is what caused
-this, so tightening it further seems unpromising; adding "answer only what was
-asked" would be a second change, and this unit allows one. Three runs also
-cannot tell me whether the wordiness is a general effect or something this
-question provokes. What I can say is where the system moved, why, and that by
-my own criterion it is worse than before.
 
 ## What's Still Broken
 
+Criterion 5 is still broken.
+I made the citation rule in the generation prompt stricter: cite only the documents whose text states what you wrote. And that fixed the over-citation the criterion originally caught. But it introduced a new failure in its place: answers are now wordier, adding information the question
+did not ask for, and each added claim brings a citation that my scorer flags.
+
+I am not sure how to fix it. Tightening the citation rule is what caused this, so tightening it further seems unpromising; adding "answer only what was asked" would be a second change, and this unit allows one. Three runs also cannot tell me whether the wordiness is a general effect or something this question provokes. What I can say is where the system moved, why, and that by my own criterion it is worse than before.
 <!-- For each criterion still missed after your fix: what you'd do about it,
      and why you stopped where you did.
 
@@ -403,6 +398,7 @@ my own criterion it is worse than before.
 
 ## What I'd Do Differently
 
+I wouldn't rewrite any of the five. Each measured what it said it would. What's missing is a sixth: the answer stays inside the question. Nothing in my set says an answer shouldn't volunteer material nobody asked for, which is why my improvement could make answers wordier without any criterion registering it directly. It only surfaced as a citation failure under criterion 5. I'd test it by reading the 15 answers the way I read the 10 sampled chunks for criterion 4. I'd also make `expects` per-claim instead of per-question, so `c5` can ask whether each cited source supports the claim assigned to it, rather than testing every cited source against one phrase.
 <!-- Knowing what you know now — which of your five criteria would you write
      differently, and why?
 
