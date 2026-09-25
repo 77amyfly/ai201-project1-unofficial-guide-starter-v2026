@@ -198,7 +198,7 @@ I asked Claude whether I could design a test question that requires the model to
 | 2. Every answer names a source | 5/5 | 5/5 | 5/5 | 5/5 | MET |
 | 3. Gate stops out-of-corpus questions | 5/5 | 5/5 | 5/5 | 5/5 | MET |
 | 4. Sampled chunks can answer a question about their own content on their own, without relying on surrounding context | 8/10| 10/10| 10/10|10/10 | MET |
-| 5. Cited source contains the information given in the answer| 5/5  | 5/5 | 4/5 | 5/5 | MISSED |
+| 5. Cited source contains the information given in the answer| 5/5 | 5/5 | 4/5 | 5/5 | MISSED |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
@@ -347,13 +347,15 @@ question counts for as much as one that actually states the fact. That is exactl
 <!-- Same format, same five criteria, three runs each.
      `python run_eval.py --label after` -->
 
+results/run_2026-09-25_1012_after.md
+
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4/5 | 5/5 | 5/5 | 5/5 | MET |
+| 2. Every answer names a source | 5/5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. Gate stops out-of-corpus questions | 5/5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Sampled chunks can answer a question about their own content on their own, without relying on surrounding context | 8/10| 10/10| 10/10|10/10 | MET |
+| 5. Cited source contains the information given in the answer| 5/5 | 4/5 | 4/5 | 4/5 | MISSED |
 
 **Did it help?**
 
@@ -363,6 +365,31 @@ question counts for as much as one that actually states the fact. That is exactl
      tell.
 
      Milestone 4. -->
+No. Criterion 5 went from 14 of 15 answers passing to 12 of 15. It fixed the
+failure it was aimed at and introduced a new one.
+
+Fixed: Run 2 of "How many midterms does Linear Algebra have?" used to cite wrong source
+`course_math_220_workload.txt` . After the change, all three runs cite only those right documents.The failure did not recur.
+
+New issue: "Do we have On-campus work?" passed three times before and failed
+three times after. Before, every run answered out of `money_jobs.txt` and cited
+only that file. After, every run also pulls in
+`admin_campus_jobs_and_financial_aid.txt` and adds a point about work-study.
+Retrieval is identical before and after(same best distance, same five files,
+the admin file among them both times) so this is generation, caused by the one
+thing I changed.
+
+The model now appears to check the source of every statement it makes, which is
+what I asked for. The side effect is wordier answers: a yes/no question about
+whether campus jobs exist now comes back with an unrequested point about
+financial aid, and each added claim brings a citation my scorer then flags.
+
+I am not sure how to fix it. Tightening the citation rule is what caused
+this, so tightening it further seems unpromising; adding "answer only what was
+asked" would be a second change, and this unit allows one. Three runs also
+cannot tell me whether the wordiness is a general effect or something this
+question provokes. What I can say is where the system moved, why, and that by
+my own criterion it is worse than before.
 
 ## What's Still Broken
 
