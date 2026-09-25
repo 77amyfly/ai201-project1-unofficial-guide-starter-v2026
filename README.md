@@ -281,6 +281,29 @@ Source: course_math_220.txt (and course_math_220_exams.txt, course_math_220_work
 
 ## Diagnoses
 
+Criterion 5 — an answer cited a source that does not contain the information given in the answer
+
+Stage: generation.
+
+On run 2, "How many midterms does Linear Algebra have?" came back as:
+
+> MATH 220 Linear Algebra has two midterms.
+>
+> Source: course_math_220.txt (and course_math_220_exams.txt,
+> course_math_220_workload.txt)
+
+`course_math_220_workload.txt` is three sentences about weekly hours — "6 to 8
+hours a week, almost all of it on problem sets", front-loaded in the first
+month. It contains no exam information at all. The answer's claim about midterm
+counts was therefore attributed to a file that cannot support it, and `c5` in
+`scorer.py::judge` came out 0.
+
+This is generation and not retrieval. Best distance was 0.3867 on all
+three runs, so `store.py::search` returned identical chunks every time, and
+`c1` was 1 every time which means the midterm count was present in the retrieved text.
+Runs 1 and 3 of the same question attributed more narrowly and passed. Nothing
+upstream of generation varied; only the model's choice of what to cite did.
+
 <!-- For each miss: which stage caused it, and how. The stage alone isn't
      enough — you need the mechanism.
 
@@ -302,6 +325,7 @@ Source: course_math_220.txt (and course_math_220_exams.txt, course_math_220_work
 ## The Improvement
 
 **What I changed:**
+
 
 **Why I picked it:**
 
