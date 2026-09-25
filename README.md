@@ -205,19 +205,20 @@ I asked Claude whether I could design a test question that requires the model to
      Name the file and function that produced it. -->
 ### Evidence
 
-**Criterion 1 & 2** — from results/run_2026-09-21_1156_before.md, run_eval.py::main:
+**Criterion 1 & 2** — from results/run_2026-09-24_1621_before.md, run_eval.py::main:
 ### Does Cell Biology have lecture? — run 1
 
 - Best distance: 0.4760 (passed the gate)
 - Sources retrieved: course_biol_160.txt, course_biol_160_exams.txt, course_biol_160_workload.txt, course_cs_210.txt, course_econ_101.txt
 
 ```
-Yes, Cell Biology (BIOL 160) has a format of lecture three times a week. 
+Yes, BIOL 160 Cell Biology has a format of lecture three times a week. 
 
 Source: course_biol_160.txt
 ```
 
-**Criterion 3** —from results/run_2026-09-21_1156_before.md, run_eval.py::check_out_of_scope:
+**Criterion 3** —from results/run_2026-09-24_1621_before.md, run_eval.py::check_out_of_scope:
+
 | Out-of-scope question | Best distance | Gate |
 |---|---|---|
 | What is the capital of Mongolia? | 0.825 | refused |
@@ -229,6 +230,7 @@ Source: course_biol_160.txt
 ---
 
 **Criterion 4** —from results/chunks_check_before.md, chunker.py::split_documents:
+
 Chunk 4  |  source: course_cs_340_exams.txt#0  |  produced by: chunker.py::split_documents
 ======================================================================
 CS 340 Databases — assessment
@@ -245,18 +247,18 @@ Asked about this a lot so writing it down. Depends entirely on your cluster; the
 
 If you're someone who needs quiet to work, the library is open until 2am during term and that's what most people in this building end up doing.
 
-**Criterion 5** — from results/run_2026-09-21_1156_before.md, run 2 of the midterms question:
+**Criterion 5** — from results/run_2026-09-24_1621_before.md, run 2 of the midterms question:
+
 ### How many midterms does Linear Algebra have? — run 2
 
 - Best distance: 0.3867 (passed the gate)
 - Sources retrieved: course_cs_210_exams.txt, course_math_220.txt, course_math_220_exams.txt, course_math_220_workload.txt, course_phys_130_exams.txt
 
 ```
-Linear Algebra (MATH 220) has two midterms. 
+MATH 220 Linear Algebra has two midterms. 
 
-This information comes from **course_math_220.txt**, **course_math_220_exams.txt**, and **course_math_220_workload.txt**.
+Source: course_math_220.txt (and course_math_220_exams.txt, course_math_220_workload.txt)
 ```
-
 
 ## Verdicts
 
