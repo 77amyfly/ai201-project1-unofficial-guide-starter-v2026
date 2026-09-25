@@ -167,6 +167,16 @@ I asked Claude whether my standard 4 (chunks self-contained) was actually object
 **2.**
 I asked Claude whether I could design a test question that requires the model to synthesize information (add up midterms + final exam count) rather than just extract one fact from one sentence. Claude said yes, this is actually the main work RAG should do: understanding and processing retrieved information, not just copying it. Based on that insight, I designed "How many exams does Linear Algebra have?" as one of my five test questions.
 
+**3.**
+When run 2 cited a file that doesn't contain the answer, I couldn't tell which
+stage of the pipeline was responsible, so I worked through it with Claude. I
+asked what each stage is responsible for and what a failure at each one would
+look like, then checked my own run log against those descriptions. The deciding
+evidence was that best distance was 0.3867 on all three runs and the same five
+files came back every time, with c1 passing every time. Retrieval had given the
+model the same material in the run that failed as in the two that passed, so the
+failure had to be in generation.
+
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
      claims earns nothing.
