@@ -325,6 +325,15 @@ upstream of generation varied; only the model's choice of what to cite did.
 ## The Improvement
 
 **What I changed:**
+The citation rule in the grounding prompt in `generate.py::GROUNDING_INSTRUCTION`. 
+previously:
+
+> - Name the document your answer came from, using the filename given in each excerpt.
+
+now:
+
+> - Cite only the documents whose text actually states what you wrote, using the filename given in each excerpt.
+> - Do not list a document just because it appeared above. If an excerpt contributed no fact to your answer, leave it out — even when it covers the same course or topic.
 
 
 **Why I picked it:**
