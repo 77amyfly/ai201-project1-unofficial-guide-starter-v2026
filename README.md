@@ -337,7 +337,8 @@ now:
 
 
 **Why I picked it:**
-
+The old rule — "name the document your answer came from" is vague about what "came from" means, so a file that is merely related to the
+question counts for as much as one that actually states the fact. That is exactly how run 2 failed: it cited `course_math_220_workload.txt`, which covers the same course but says nothing about exams. The new wording draws the line explicitly，cite the document that contains the answer, not the ones that are about the topic.
 <!-- Connect it to a specific diagnosis above in one sentence. If you can't,
      you picked a fix because it sounded impressive. -->
 
