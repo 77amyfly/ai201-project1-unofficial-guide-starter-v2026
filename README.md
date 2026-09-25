@@ -273,11 +273,11 @@ Source: course_math_220.txt (and course_math_220_exams.txt, course_math_220_work
 
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunk contains the answer | MET | Target was 4 of 5; all three runs came out 5/5. |
+| 2 | Every answer names a source | MET | Target was 5 of 5; all 15 answers named one of the retrieved source files. |
+| 3 | Gate stops out-of-corpus questions | MET | Target was 5 of 5; the gate refused 5 of 5. This is one deterministic measurement. |
+| 4 | Sampled chunks can answer a question about their own content on their own, without relying on surrounding context | MET | Target was 8 of 10. I read 10 randomly sampled chunks cold and asked of each whether it could answer a question about its own content without the surrounding document; all 10 could. |
+| 5 | Cited source contains the information given in the answer| MISSED | Run 2 of "How many midterms does Linear Algebra have?" cited course_math_220_workload.txt, which contains no exam information. The target says every cited source, so one such answer in one run makes the criterion MISSED. |
 
 ## Diagnoses
 
