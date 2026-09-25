@@ -1,8 +1,6 @@
 88 chunks total. Showing 10, spread across the corpus.
 
-Paste these into your README under Sample Chunks. The rubric asks
-for the source file and the function that produced them — both are
-printed for you below.
+4. Sampled chunks can answer a question about their own content on their own, without relying on surrounding context | 8/10| 10/10| 10/10|10/10 | MET |
 
 ======================================================================
 Chunk 1  |  source: admin_add_drop_deadline.txt#0  |  produced by: chunker.py::split_documents
@@ -92,5 +90,4 @@ Machines take $1.50 wash, $1.25 dry, coin or card. There are eight washers and s
 
 Best time to do laundry here is Tuesday or Wednesday morning. Sunday after 6pm you will wait.
 
-For each one, ask: could someone answer a question using only this,
-without reading what came before or after?
+

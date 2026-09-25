@@ -198,7 +198,7 @@ I asked Claude whether I could design a test question that requires the model to
 | 2. Every answer names a source | 5/5 | 5/5 | 5/5 | 5/5 | MET |
 | 3. Gate stops out-of-corpus questions | 5/5 | 5/5 | 5/5 | 5/5 | MET |
 | 4. Sampled chunks can answer a question about their own content on their own, without relying on surrounding context | 8/10| 10/10| 10/10|10/10 | MET |
-| 5. Cited source contains the information given in the answer| 5/5  | 5/5 | 4/5 | 5/5 | MISS |
+| 5. Cited source contains the information given in the answer| 5/5  | 5/5 | 4/5 | 5/5 | MISSED |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
