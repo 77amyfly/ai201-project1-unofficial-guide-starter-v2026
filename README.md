@@ -34,15 +34,9 @@ This system answers questions about campus life at a small college, using a corp
 **Chunk size: One document**
 **Overlap: 0**
 
-<!-- One document = one chunk.
+One document = one chunk.
 
-    Each document in campus_life covers one topic (e.g. one course)
-    through several attributes: exam, workload, curve. Splitting by 
-    attribute would separate the attribute from the topic name at 
-    the top of the document, so a question like. "Cell Biology workload"
-    would no longer match the chunk that holds the answer. 
-    Documents are short (178-549 chars), so a whole post is still a 
-    focused chunk. No overlap since there are no cut points. -->
+Each document in campus_life covers one topic (e.g. one course) through several attributes: exam, workload,curve. Splitting by attribute would separate the attribute from the topic name at the top of the document, so a question like. "Cell Biology workload" would no longer match the chunk that holds the answer. Documents are short (178-549 chars), so a whole post is still a focused chunk. No overlap since there are no cut points. 
 
 ## Sample Chunks
 
@@ -200,11 +194,11 @@ I asked Claude whether I could design a test question that requires the model to
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
-| 2. Every answer names a source | 5 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
-| 3. Gate stops out-of-corpus questions | 4 of 5 | 5 of 5 | 5 of 5 | 5 of 5 | MET |
-| 4. Sampled chunks can answer a question about their own content on their own, without relying on surrounding context | 8 of 10| 10 of 10| 10 of 10|10 of 10 | MET |
-| 5. Cited source contains the information given in the answer| 5 of 5  | 5 of 5 | 5 of 5 | 5 of 5 | MET |
+| 1. Retrieved chunk contains the answer | 4/5 | 5/5 | 5/5 | 5/5 | MET |
+| 2. Every answer names a source | 5/5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. Gate stops out-of-corpus questions | 5/5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Sampled chunks can answer a question about their own content on their own, without relying on surrounding context | 8/10| 10/10| 10/10|10/10 | MET |
+| 5. Cited source contains the information given in the answer| 5/5  | 5/5 | 4/5 | 5/5 | MISS |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
